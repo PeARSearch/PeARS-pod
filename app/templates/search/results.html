@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+        integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+        <style type="text/css">
+            p {font-size: 16px;}
+
+            .thumbnail iframe {
+                width: 1440px;
+                height: 900px;
+            }
+
+            .thumbnail {
+                position: relative;
+                -ms-zoom: 0.25;
+                -moz-transform: scale(0.25);
+                -moz-transform-origin: 0 0;
+                -o-transform: scale(0.25);
+                -o-transform-origin: 0 0;
+                -webkit-transform: scale(0.25);
+                -webkit-transform-origin: 0 0;
+            }
+
+            .thumbnail:after {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+        </style>
+
+        <title>PeARS, Pod Zero</title>
+    </head>
+
+    <body>
+    <nav class="navbar navbar-inverse" style="background-color: #000000;">
+    <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="http://www.openmeaning.org/" class="navbar-left"><img src="/static/header-small.jpg" height="80px"></a>
+        </div>
+    </div>
+    </nav>
+
+    <div class="container">
+
+        <div  class="row">
+            <div class="col-md-6">
+            <br><br>
+            <p>Welcome to Open Meaning, Pod0!</p>
+            <p>This PeARS pod is for pages in English, on general topics. It currently has {{num_entries}} recorded pages. You can search
+            this pod using the search function below, to give yourself a feel for what is indexed.</p>
+            <br><br>
+            <form class="mx-sm-6" action="{{url_for('.index')}}">
+                <div class="input-group" style="width:530px; height:40px; text-align:center;margin:0 auto;">
+                <input class="form-control input-lg" title="Enter your Search Query." placeholder="Enter your Search Query" type="text" name='q'>
+                <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="submit">Search</button></span>
+                </div>
+            </form>
+            <br>
+            Powered by       <img src="/static/pears-logo-small.png" width="100px"/>
+            </div>
+            <div class="col-md-6">
+            <br><br>
+            <div id="page-content-wrapper">
+               {% for result in results %}
+                   <div class="row">
+                   <h3><a href="{{result[0]}}">{{result[1]}}</a>
+                   {% if result[3] == True %}<img src="{{ url_for('static', filename='cc.png')}}" width='24px'/>{% endif %} </h3>
+                   {{result[2]}} ... <!-- <a href="{{result[3]}}">Cache</a>--> <br>
+                   <a href="{{result[0]}}">{{result[0]}}</a>
+                   <hr/>
+                   </div>
+               {% endfor %}
+            </div>
+            </div>
+        </div>
+
+    </div><!-- /.container -->
+    </body>
+</html>
