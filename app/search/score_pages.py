@@ -2,16 +2,20 @@
 Called by ./mkQueryPage.py
 """
 
+import os, requests
+import re
 import sys
-import webbrowser
+from urllib.parse import urlparse
+from operator import itemgetter
 import math
+import numpy
 from app.api.models import Urls
 from app.utils_db import get_db_url_snippet, get_db_url_title, get_db_url_cc
 
 from .overlap_calculation import score_url_overlap, generic_overlap
 from app.search import term_cosine
-from app.search.mk_page_vector import compute_query_vectors
 from app.utils import cosine_similarity, convert_to_array
+from app.search.mk_page_vector import compute_query_vectors
 
 def score(query, query_dist, query_freqs):
     """ Get distributional score """
@@ -33,19 +37,24 @@ def score_docs(query, query_dist, query_freqs):
     DS_scores, URL_scores, title_scores, term_scores = score(query,query_dist,query_freqs)
     for url in list(DS_scores.keys()):
         #print(url,DS_scores[url], title_scores[url], term_scores[url])
-        document_scores[url] = DS_scores[url] + 2*title_scores[url] + term_scores[url]
+        document_scores[url] = DS_scores[url] + 2* title_scores[url] + term_scores[url]
         if math.isnan(document_scores[url]):  # Check for potential NaN -- messes up with sorting in bestURLs.
           document_scores[url] = 0
+        
     return document_scores
 
 
 def bestURLs(doc_scores):
     best_urls = []
+    netlocs_used = [] #Don't return 100 pages from the same site
     c = 0
     for w in sorted(doc_scores, key=doc_scores.get, reverse=True):
+        loc = urlparse(w).netloc
         if c < 50:
-          best_urls.append(w)
-          c += 1
+          if loc not in netlocs_used:
+              best_urls.append(w)
+              netlocs_used.append(loc)
+              c += 1
         else:
             break
     return best_urls

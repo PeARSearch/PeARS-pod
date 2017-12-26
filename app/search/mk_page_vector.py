@@ -1,6 +1,7 @@
 import re
 import numpy as np
 import logging
+import string
 from app import db
 from app.api.models import dm_dict_en, Urls
 from app.utils import convert_to_string, convert_dict_to_string, normalise
@@ -20,7 +21,7 @@ def clean_text(text):
 def compute_freq_vector(text):
     freqs = {}
     for w in text:
-        if w not in stopwords:
+        if w not in stopwords and w not in string.punctuation:
             if w in freqs:
                 freqs[w]+=1
             else:
