@@ -21,7 +21,7 @@
             <span class="icon-bar"></span>
           </button>
           <div style="padding-left:20px">
-          <a href="{{url_for('.index')}}"><img src="/static/pears-logo-small-inverse.png" height="80px"></a>
+          <a href="{{url_for('search.index')}}"><img src="/static/pears-logo-small-inverse.png" height="80px"></a>
           </div>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
@@ -36,47 +36,28 @@
 
         <div  class="row">
             <div class="col-md-6">
-            <br><br>
-            <div style="background-color:#ffffff; padding:10px;  border-radius:5px">
-            <p>Welcome to <b>{{name}}</b>! {{description}}</p>
-            <p>It currently has {{num_entries}} recorded pages. You can search
-            this pod using the search function below, to give yourself a feel for what is indexed.</p>
+            <div style="background-color:#fff; color:#000; padding:10px;  border-radius:5px">
+            <h3>What is PeARS?</h3>
+            <hr>
+            PeARS is an open source project which aims at putting Web search and Web indexing in the hands of the people.
+            <h3>What is a pod?</h3>
+            <hr>
+            A PeARS pod is a searchable index of Web pages. Anybody with a tiny bit of technical knowledge can create a pod to share the best sites they know on a particular topic. The page you are visiting now, for instance, is an awesome pod on [topic]. If you run the PeARS software on your machine, you can download the whole of a pod's data for private searching.
             </div>
-            <br><br>
-            <form class="mx-sm-6" action="{{url_for('.index')}}">
-                <div class="input-group" style="width:100%; height:40px; text-align:left; margin:0 auto;">
-                <input class="form-control input-lg" title="Enter your Search Query." placeholder="Enter your Search Query" type="text" name='q'>
-                <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="submit">Search</button></span>
-                </div>
-            </form>
-            <br>
-            </div>
-            <div class="col-md-6">
-            <div style="background-color:#ffffff; padding-left:30px; padding-top:10px; padding-right:30px;  border-radius:5px">
-            <br><br>
-               {% for result in results %}
-                   <div>
-                   <h3><a href="{{result[0]}}">{{result[1]}}</a>
-                   {% if result[3] == True %}<img src="{{ url_for('static', filename='cc.png')}}" width='24px'/>{% endif %} </h3>
-                   {{result[2]}} ... <!-- <a href="{{result[3]}}">Cache</a>--> <br>
-                   <a href="{{result[0]}}">{{result[0]}}</a>
-                   <hr>
-                   </div>
-               {% endfor %}
-            </div>
+        </div>
             
-        <div class="container">
+       <div class="container">
             <div style="background-color: #fff; position:fixed; right:4px; bottom:4px; border-radius:3px; padding: 3px" class="btn btn-lg" data-toggle="popover" title="<b>Background image</b>" data-content="<a href='https://www.flickr.com/photos/pixality/10778064765/'>Pods</a> by <br>Flickr user Pixality - CC-BY-SA" data-placement="top" data-html="true" data-trigger="hover">
                 <img src="/static/camera_lens.png" width="30px"/><b> Credit</b>
-            </button>
-        </div>
-        <script>
-        $(document).ready(function(){
-        $('[data-toggle="popover"]').popover({container: 'body'});   
-        });
-        </script>
-
             </div>
-    </div>
+       </div>
+
+       <script>
+       $(document).ready(function(){
+       $('[data-toggle="popover"]').popover({container: 'body'});   
+       });
+       </script>
+
+    </div><!-- /.container -->
     </body>
 </html>

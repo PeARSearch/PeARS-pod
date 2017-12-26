@@ -3,46 +3,15 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
-        integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-
-        <style type="text/css">
-            p {font-size: 16px;}
-
-            .thumbnail iframe {
-                width: 1440px;
-                height: 900px;
-            }
-
-            .thumbnail {
-                position: relative;
-                -ms-zoom: 0.25;
-                -moz-transform: scale(0.25);
-                -moz-transform-origin: 0 0;
-                -o-transform: scale(0.25);
-                -o-transform-origin: 0 0;
-                -webkit-transform: scale(0.25);
-                -webkit-transform-origin: 0 0;
-            }
-
-            .thumbnail:after {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-            }
-
-        </style>
-
-        <title>PeARS, Pod Zero</title>
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png')}}">
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+        <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+        <title>PeARS - {{name}}</title>
     </head>
 
-    <body>
-    <nav class="navbar navbar-inverse" style="background-color: #000000;">
+    <body style="background-image: url('/static/background.png'); background-color:#000000; background-size:cover; background-repeat:no-repeat; background-position:center center;">
+    <nav class="navbar navbar-default" style="background-color: #000000;">
     <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -51,7 +20,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="http://www.openmeaning.org/" class="navbar-left"><img src="/static/pears-logo-small.png" height="80px"></a>
+          <div style="padding-left:20px">
+          <a href="{{url_for('.index')}}"><img src="/static/pears-logo-small-inverse.png" height="80px"></a>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+        <li><a href="{{url_for('pages.return_about')}}">About</a></li>
+        </ul>
         </div>
     </div>
     </nav>
@@ -61,30 +37,32 @@
         <div  class="row">
             <div class="col-md-6">
             <br><br>
-            <p>Welcome to <b>pod name</b>!</p>
+            <div style="background-color:#ffffff; padding:10px;  border-radius:5px">
+            <p>Welcome to <b>{{name}}</b>! {{description}}</p>
             <p>It currently has {{num_entries}} recorded pages. You can search
             this pod using the search function below, to give yourself a feel for what is indexed.</p>
+            </div>
             <br><br>
             <form class="mx-sm-6" action="{{url_for('.index')}}">
-                <div class="input-group" style="width:530px; height:40px; text-align:left; margin:0 auto;">
+                <div class="input-group" style="width:100%; height:40px; text-align:left; margin:0 auto;">
                 <input class="form-control input-lg" title="Enter your Search Query." placeholder="Enter your Search Query" type="text" name='q'>
                 <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="submit">Search</button></span>
                 </div>
             </form>
             <br>
-            Powered by       <img src="/static/pears-logo-small.png" width="100px"/>
             </div>
             <div class="col-md-6">
             <br><br>
-            {% for neighbour in neighbours %}
-                <h3><a href="{{neighbour[0]}}">{{neighbour[1]}}</a></h3>
-                {{neighbour[2]}} ... <br>
-                <a href="{{neighbour[0]}}">{{neighbour[0][:100]}}</a>
-                <hr/>
-            {% endfor %}
-
+            <div class="container">
+            <div style="background-color: #fff; position:fixed; right:4px; bottom:4px; border-radius:3px; padding: 3px" class="btn btn-lg" data-toggle="popover" title="<b>Background image</b>" data-content="<a href='https://www.flickr.com/photos/pixality/10778064765/'>Pods</a> by <br>Flickr user Pixality - CC-BY-SA" data-placement="top" data-html="true" data-trigger="hover">
+                <img src="/static/camera_lens.png" width="30px"/><b> Credit</b>
             </div>
-        </div>
+            </div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({container: 'body'});   
+});
+</script>
 
     </div><!-- /.container -->
     </body>
