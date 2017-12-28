@@ -1,0 +1,3 @@
+name = Fantastic Pod
+description = A pod to store really cool stuff
+language = English
