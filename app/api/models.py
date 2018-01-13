@@ -1,8 +1,11 @@
 from app import db
 from app.utils import readDM
+from os.path import dirname,join,realpath
 
 #Build semantic spaces
-dm_dict_en = readDM("./app/static/spaces/english.dm")
+dir_path = dirname(dirname(realpath(__file__)))
+space_file = join(dir_path, "static/spaces/english.dm")
+dm_dict_en = readDM(space_file)
 
 # Define a base model for other database tables to inherit
 class Base(db.Model):
