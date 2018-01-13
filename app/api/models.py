@@ -18,7 +18,7 @@ class Pods(Base):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(1000))
     url = db.Column(db.String(1000))
-    description = db.Column(db.String(7000))
+    description = db.Column(db.String(1000))
     language = db.Column(db.String(1000))
     DS_vector = db.Column(db.String(7000))
     word_vector = db.Column(db.String(7000))
@@ -28,6 +28,8 @@ class Pods(Base):
         self.url = url
         self.description = description
         self.language = language
+        self.DS_vector = DS_vector
+        self.word_vector = word_vector
     
     @property
     def serialize(self):

@@ -3,7 +3,7 @@ from flask import Flask
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from os.path import dirname,join,realpath
 
 # Define the WSGI application object
 app = Flask(__name__)
@@ -14,7 +14,6 @@ app.config.from_object('config')
 # Define the database object which is imported
 # by modules and controllers
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 # Sample HTTP error handling
 #@app.errorhandler(404)
@@ -37,22 +36,24 @@ app.register_blueprint(pages_module)
 #db.drop_all()
 db.create_all()
 
-# Populate pod from CSV file. Can be commented out after first use.
-from app.api import read_urls_csv
 
 # Populate templates with pod info from self.txt
 from app.api.models import Pods
 
-self_info = open("me.txt",'r')
-tmp = {}
-for l in self_info:
+dir_path = dirname(dirname(realpath(__file__)))
+self_info_file = open(join(dir_path, "me.txt"),'r')
+self_info = {}
+for l in self_info_file:
     l = l.rstrip('\n')
     fields = l.split(" = ")
-    tmp[fields[0]] = fields[1]
-self_info.close()
+    self_info[fields[0]] = fields[1]
+self_info_file.close()
 
-print(tmp)
-if len(Pods.query.all()) == 0 and 'name' in tmp and 'description' in tmp and 'language' in tmp:
-    self = Pods(name=tmp['name'], description=tmp['description'], language=tmp['language'])
+if len(Pods.query.all()) == 0 and 'name' in self_info and 'description' in self_info and 'language' in self_info:
+    self = Pods(name=self_info['name'], description=self_info['description'], language=self_info['language'])
     db.session.add(self)
     db.session.commit()
+
+# Populate pod from CSV file. Can be commented out after first use.
+#from app.api import read_urls_csv
+
