@@ -47,13 +47,14 @@ def subscribe():
     print("Subscribing to public pods")
     pods=update_pod_list()
     for p in pods:
-        pod_from_scratch(p[0],p[1],p[2],p[3])
+        pod_from_scratch(str(p[0]),str(p[1]),str(p[2]),str(p[3]))
     f = join(dir_path, "app", "static", "pods", "pods_to_index.txt")
     print("Reading", f)
     pod_urls = readPods(f)
     urls = []
     for pod_url in pod_urls:
         print(pod_url)
+        pod_url = str(pod_url)
         pod_entry = db.session.query(Pods).filter_by(url=pod_url).first()
         pod_entry.registered = True
         db.session.commit()
@@ -84,26 +85,6 @@ def subscribe():
             db.session.add(u)
             db.session.commit()
             c += 1
-
-
-'''Unsubscribe'''
-def unsubscribe():
-    if request.form.getlist('pods') is not None:
-        unsubscribed_pods = request.form.getlist('pods')
-        for pod in unsubscribed_pods:
-            print("Unsubscribing pod...", pod)
-            pod_entries = db.session.query(Urls).filter_by(pod=pod).all()
-            if pod_entries is not None:
-                for e in pod_entries:
-                    db.session.delete(e)
-                    db.session.commit()
-            pod_entry = db.session.query(Pods).filter_by(name=pod).first()
-            if "localhost" in pod_entry.url:
-                db.session.delete(pod_entry)
-                db.session.commit()
-            else:
-                pod_entry.registered = False
-                db.session.commit()
 
 
 index_file()

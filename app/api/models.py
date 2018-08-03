@@ -25,14 +25,14 @@ class Base(db.Model):
 
 class Urls(Base):
     id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(1000))
-    title = db.Column(db.String(1000))
+    url = db.Column(db.String(500))
+    title = db.Column(db.String(500))
     vector = db.Column(db.String(7000))
     freqs = db.Column(db.String(7000))
     snippet = db.Column(db.String(1000))
     cc = db.Column(db.Boolean)
-    pod = db.Column(db.String(1000))
-    keyword = db.Column(db.String(1000))
+    pod = db.Column(db.String(200))
+    keyword = db.Column(db.String(200))
 
     def __init__(self,
                  url=None,
@@ -72,10 +72,10 @@ class Urls(Base):
 
 class Pods(Base):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(1000))
-    url = db.Column(db.String(1000))
-    description = db.Column(db.String(7000))
-    language = db.Column(db.String(1000))
+    name = db.Column(db.String(200))
+    url = db.Column(db.String(500))
+    description = db.Column(db.String(1000))
+    language = db.Column(db.String(100))
     DS_vector = db.Column(db.String(7000))
     word_vector = db.Column(db.String(7000))
     registered = db.Column(db.Boolean)

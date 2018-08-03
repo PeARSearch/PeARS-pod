@@ -10,7 +10,7 @@
         <title>PeARS - {{name}}</title>
     </head>
 
-    <body style="background-image: url('/static/background.png'); background-color:#000000; background-repeat:repeat-y; background-position:center center;">
+    <body style="background-image: url('/static/background.png'); background-color:#000000; background-size:100%; background-repeat:no-repeat; background-position:fixed; top:0; left:0;">
     <nav class="navbar navbar-default" style="background-color: #000000;">
     <div class="container">
         <div class="navbar-header">
@@ -35,23 +35,15 @@
     <div class="container">
 
         <div  class="row">
-            <div class="col-md-6">
+            <div class="col-md-10">
             <br><br>
-            <div style="background-color:#ffffff; padding:10px;  border-radius:5px">
-            <p>Welcome to <b>{{name}}</b>! {{description}}</p>
-            <p>It currently has {{num_entries}} recorded pages. You can search
-            this pod using the search function below, to give yourself a feel for what is indexed.</p>
-            </div>
-            <br><br>
-            <form class="mx-sm-6" action="{{url_for('.index')}}">
+            <form class="mx-sm-10" action="{{url_for('.index')}}">
                 <div class="input-group" style="width:100%; height:40px; text-align:left; margin:0 auto;">
                 <input class="form-control input-lg" title="Enter your Search Query." placeholder="Enter your Search Query" type="text" name='q'>
                 <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="submit">Search</button></span>
                 </div>
             </form>
             <br>
-            </div>
-            <div class="col-md-6">
             <div style="background-color:#ffffff; padding-left:30px; padding-top:10px; padding-right:30px;  border-radius:5px">
             <br><br>
                {% for result in results %}
@@ -66,7 +58,7 @@
             </div>
             
         <div class="container">
-            <div style="background-color: #fff; position:fixed; right:4px; bottom:4px; border-radius:3px; padding: 3px" class="btn btn-lg" data-toggle="popover" title="<b>Background image</b>" data-content="<a href='https://www.flickr.com/photos/veronique-mergaux/6716360979/'>Pods</a> by <br>Flickr user Véronique Mergaux - <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>" data-placement="top" data-html="true">
+            <div style="background-color: #fff; position:fixed; right:4px; bottom:4px; border-radius:3px; padding: 3px" class="btn btn-lg" data-toggle="popover" title="<b>Background image</b>" data-content="<a href='https://www.flickr.com/photos/alanandanders/3975295765/'>tolmer</a> by <br>Flickr user Alan Lam - <a href='https://creativecommons.org/licenses/by-nd/2.0/'>CC-BY-ND 2.0</a>" data-placement="top" data-html="true">
                 <img src="/static/camera_lens.png" width="30px"/><b> Credit</b>
             </button>
         </div>
@@ -76,7 +68,7 @@
         });
         </script>
 
-            </div>
+       </div>
     </div>
     </body>
 </html>
