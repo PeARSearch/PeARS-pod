@@ -22,18 +22,18 @@ db = SQLAlchemy(app)
 
 # Import a module / component using its blueprint handler variable (mod_auth)
 from app.api.controllers import api as api_module
-from app.search.controllers import search as search_module
 from app.pages.controllers import pages as pages_module
+from app.search.controllers import search as search_module
 
 # Register blueprint(s)
 app.register_blueprint(api_module)
-app.register_blueprint(search_module)
 app.register_blueprint(pages_module)
+app.register_blueprint(search_module)
 # ..
 
 # Build the database:
 # This will create the database file using SQLAlchemy
-#db.drop_all()
+db.drop_all()
 db.create_all()
 
 
@@ -55,5 +55,4 @@ if len(Pods.query.all()) == 0 and 'name' in self_info and 'description' in self_
     db.session.commit()
 
 # Populate pod from CSV file. Can be commented out after first use.
-#from app.api import read_urls_csv
-
+from app.pod_loader import load_pods

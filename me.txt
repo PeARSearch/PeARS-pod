@@ -1,3 +1,3 @@
-name = Fantastic Pod
-description = A pod to store really cool stuff
+name = Pod Zero
+description = The ur-grandmother of all pods.
 language = English
