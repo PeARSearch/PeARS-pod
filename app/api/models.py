@@ -1,9 +1,11 @@
 from app.utils import readDM, convert_to_array
 from app import db
+from os.path import dirname, join, realpath
 import numpy as np
 
 # Build semantic spaces
-dm_dict_en, version = readDM("./app/static/spaces/english.dm")
+d = dirname(dirname(realpath(__file__)))
+dm_dict_en, version = readDM(join(d,"static/spaces/english.dm"))
 
 # Record language codes
 language_codes = {}
