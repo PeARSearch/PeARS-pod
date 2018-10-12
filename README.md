@@ -9,29 +9,33 @@ In order to use this repo, you need to have copy of [PeARS, version Orchard](htt
 
 ## Learn to use your pod locally
 
-1. Clone this repo on your machine:
+#### 1. Clone this repo on your machine:
 
     git clone https://github.com/PeARSearch/PeARS-pod.git
 
-
-2. Setup a virtualenv in your directory (**this step is optional**):
+#### 2. Optional step Setup a virtualenv in your directory.
 
     virtualenv -p python3 env && source env/bin/activate
 
-3. Install the build dependencies:
+#### 3. Install the build dependencies:
 
     pip3 install -r requirements.txt
 
-4. Head over to the app/static/spaces directory and unzip english.dm.zip.
+#### 4. Unpack the semantic space
 
-5. Tell your pod what to index. You should save a csv file containing your pod in the *app/static/pods* folder. If you don't know yet what a csv pod is, consult <a href="https://pearsearch.org/faq.html#newpods">the documentation on PeARS Orchard</a>.
+Head over to the app/static/spaces directory and unzip english.dm.zip.
 
-6. In the root of the repo, run:
+#### 5. Tell your pod what to index.
+
+You should save a csv file containing your pod in the *app/static/pods* folder. If you don't know yet what a csv pod is, consult <a href="https://pearsearch.org/faq.html#newpods">the documentation on PeARS Orchard</a>.
+
+#### 6. Run it!
+
+In the root of the repo, run:
 
     python3 run.py
 
 Now, go to your browser at localhost:5000. You should see your pod running. Happy searching!
-
 
 ## Putting your pod online
 
