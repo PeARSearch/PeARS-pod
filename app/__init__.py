@@ -9,7 +9,7 @@ from os.path import dirname,join,realpath
 app = Flask(__name__)
 
 # Configurations
-# app.config.from_object('config')
+app.config.from_object('config')
 
 # Define the database object which is imported
 # by modules and controllers
